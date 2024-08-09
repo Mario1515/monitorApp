@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { NEXO_TOKEN_CONTRACT_ADDRESS, NEXO_TOKEN_ABI, wETH_TOKEN_CONTRACT_ADDRESS, wETH_TOKEN_ABI } from "../constants/constants.js";
+import { formatBalance } from '../utils/formatBalance.js'; 
 
 const useBalance = (address) => {
     
@@ -19,7 +20,7 @@ const useBalance = (address) => {
               method: 'eth_getBalance',
               params: [address, 'latest']
             });
-            setEthBalance(ethers.formatEther(ethBalance));
+            setEthBalance(formatBalance(ethers.formatEther(ethBalance)));
           } catch (err) {
             setError('Error fetching ETH token balance');
             console.log('ETH Balance Error:', err);
@@ -29,7 +30,7 @@ const useBalance = (address) => {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const contract = new ethers.Contract(NEXO_TOKEN_CONTRACT_ADDRESS, NEXO_TOKEN_ABI, provider);
             const tokenBalance = await contract.balanceOf(address);
-            setNexoBalance(ethers.formatEther(tokenBalance));
+            setNexoBalance(formatBalance(ethers.formatEther(tokenBalance)));
           } catch (err) {
             setError('Error fetching NEXO token balance');
             console.log('NEXO Token Balance Error:', err);
@@ -40,8 +41,7 @@ const useBalance = (address) => {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const contract = new ethers.Contract(wETH_TOKEN_CONTRACT_ADDRESS, wETH_TOKEN_ABI, provider);
             const tokenBalance = await contract.balanceOf(address);
-            setWethBalance(ethers.formatEther(tokenBalance));
-            
+            setWethBalance(formatBalance(ethers.formatEther(tokenBalance)));
           } catch (err) {
             setError('Error fetching wETH token balance');
             console.log('wETH Token Balance Error:', err);

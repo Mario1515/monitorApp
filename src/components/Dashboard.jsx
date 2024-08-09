@@ -63,19 +63,19 @@ const Dashboard = ({ account, ethBalance, nexoBalance, wethBalance, network }) =
               <div className="flex justify-between">
                 <span className="text-gray-600">ETH Balance:</span>
                 <span className="font-bold text-gray-900">
-                  {ethLoading ? <Loader /> : ethBalance}
+                  {ethLoading ? <Loader /> : ethBalance || "0.000"}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">WETH Balance:</span>
                 <span className="font-bold text-gray-900">
-                  {wethLoading ? <Loader /> : wethBalance}
+                  {wethLoading ? <Loader /> : wethBalance || "0.000"}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">NEXO Balance:</span>
                 <span className="font-bold text-gray-900">
-                  {nexoLoading ? <Loader /> : nexoBalance}
+                  {nexoLoading ? <Loader /> : nexoBalance || "0.000"}
                 </span>
               </div>
             </div>
