@@ -9,3 +9,9 @@ export const wETH_TOKEN_CONTRACT_ADDRESS = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c
 export const wETH_TOKEN_ABI = [
     "function balanceOf(address owner) view returns (uint256)"
   ];
+
+// to be used only when converting ETH to wETH
+export const WETH_ABI = [
+    "function deposit() public payable",
+    "function balanceOf(address) external view returns (uint)"
+  ];

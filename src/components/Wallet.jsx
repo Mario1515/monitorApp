@@ -3,6 +3,7 @@ import useAccount from "../hooks/useAccount";
 import useLoading from "../hooks/useLoading";
 import { useNetwork } from '../context/NetworkContext';
 import useBalance from '../hooks/useBalance';
+import Dashboard from "./Dashboard";
 
 const Wallet = () => {
   const { account, connectWallet, disconnectWallet } = useAccount(); 
@@ -69,37 +70,13 @@ const Wallet = () => {
         
             {isAllowedNetwork && (
               <>
-            {/* Connected Address */}
-            <div className="mb-4 flex items-center space-x-4">
-              <h3 className="text-lg font-semibold text-gray-100">Address:</h3>
-              <p className="text-lg text-gray-300 truncate">{account}</p>
-            </div>
-
-            {/* Connected Network */}
-            <div className="mb-4 flex items-center space-x-4">
-              <h3 className="text-lg font-semibold text-gray-100">Network:</h3>
-              <p className="text-lg text-gray-300 truncate">
-              {network === '0x1' ? 'Ethereum Mainnet' : 'Sepolia Testnet'}
-              </p>
-            </div>
-
-            {/* ETH Balance */}
-            <div className="mb-4 flex items-center space-x-4">
-              <h3 className="text-lg font-semibold text-gray-100">ETH Balance:</h3>
-              <p className="text-lg text-gray-300 truncate">{ethBalance}</p>
-            </div>
-
-            {/* NEXO Balance */}
-            <div className="mb-4 flex items-center space-x-4">
-              <h3 className="text-lg font-semibold text-gray-100">NEXO Balance:</h3>
-              <p className="text-lg text-gray-300 truncate">{nexoBalance}</p>
-            </div>
-
-            {/* wETH Balance */}
-            <div className="mb-4 flex items-center space-x-4">
-              <h3 className="text-lg font-semibold text-gray-100">wETH Balance:</h3>
-              <p className="text-lg text-gray-300 truncate">{wethBalance}</p>
-            </div>
+                <Dashboard
+                  account={account}
+                  network={network}
+                  ethBalance={ethBalance}
+                  nexoBalance={nexoBalance}
+                  wethBalance={wethBalance}
+                />
 
             {/* Disconnect Wallet Button */}
             <div className="flex justify-center mt-4">
