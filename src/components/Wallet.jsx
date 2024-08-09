@@ -2,12 +2,13 @@ import React from "react";
 import useAccount from "../hooks/useAccount";
 import useLoading from "../hooks/useLoading";
 import { useNetwork } from '../context/NetworkContext';
+import useBalance from '../hooks/useBalance';
 
 const Wallet = () => {
   const { account, connectWallet, disconnectWallet } = useAccount(); 
   const [loading, startLoading] = useLoading(); //loader 
   const { network, networkError } = useNetwork(); //checking network for changes
-
+  const {balance, error} = useBalance(account);
   const handleConnect = () => {
     startLoading(connectWallet);
   };
@@ -16,7 +17,7 @@ const Wallet = () => {
     startLoading(disconnectWallet);
   };
 
-  const isAllowedNetwork = network === '0x1' || network === '0x111';
+  const isAllowedNetwork = network === '0x1' || network === '0xaa36a7';
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 p-4">
@@ -57,13 +58,33 @@ const Wallet = () => {
               </div>
             </div>
             )}
-            {/* Connected Address */}
-          
+        
             {isAllowedNetwork && (
               <>
-             <div className="mb-4 flex items-center space-x-4">
+            {/* Connected Address */}
+            <div className="mb-4 flex items-center space-x-4">
               <h3 className="text-lg font-semibold text-gray-100">Address:</h3>
               <p className="text-lg text-gray-300 truncate">{account}</p>
+            </div>
+
+            {/* Connected Network */}
+            <div className="mb-4 flex items-center space-x-4">
+              <h3 className="text-lg font-semibold text-gray-100">Network:</h3>
+              <p className="text-lg text-gray-300 truncate">
+              {network === '0x1' ? 'Ethereum Mainnet' : 'Sepolia Testnet'}
+              </p>
+            </div>
+
+            {/* ETH Balance */}
+            <div className="mb-4 flex items-center space-x-4">
+              <h3 className="text-lg font-semibold text-gray-100">ETH Balance:</h3>
+              <p className="text-lg text-gray-300 truncate">{balance}</p>
+            </div>
+
+            {/* NEXO Balance */}
+            <div className="mb-4 flex items-center space-x-4">
+              <h3 className="text-lg font-semibold text-gray-100">NEXO Balance:</h3>
+              <p className="text-lg text-gray-300 truncate">{balance}</p>
             </div>
 
             {/* Disconnect Wallet Button */}
