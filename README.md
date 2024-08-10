@@ -9,6 +9,7 @@ This project is a Crypto Dashboard Web Application built with React, ethers.js, 
 - **ethers.js**: Ethereum library.
 - **Taiwind**: CSS framework.
 - **moralis**: Live crypto data.
+- **vite**: Frontend development server.
 - **react-hot-toast**: Handling notifications and errors.
 
 ## Installation 
