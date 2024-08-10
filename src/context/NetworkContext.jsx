@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ALLOWED_NETWORKS } from "../constants/constants.js";
 
-
 const NetworkContext = createContext();
 
 export const useNetwork = () => {

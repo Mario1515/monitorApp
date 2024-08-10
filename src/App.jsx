@@ -3,6 +3,7 @@ import { NetworkProvider } from './context/NetworkContext';
 import Wallet from './components/Wallet';
 import Moralis from 'moralis';
 import toast, { Toaster } from 'react-hot-toast';
+import Footer from './components/Footer.jsx';
 
 import { MY_API_KEY } from "./constants/constants.js";
 
@@ -13,6 +14,7 @@ function App() {
     <NetworkProvider>
       <Wallet />
       <Toaster />
+      <Footer />
     </NetworkProvider>
   );
 }

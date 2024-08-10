@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Moralis from 'moralis';
 import { EvmChain } from '@moralisweb3/common-evm-utils';
+import Loader from "./Loader.jsx";
+import { NEXO_ADDRESS, wETH_TOKEN_CONTRACT_ADDRESS, USDC_ADDRESS } from "../constants/constants.js";
 import wethLogo from "../assets/wethLogo.png";
 import nexoLogo from "../assets/nexoLogo.png";
 import usdcLogo from "../assets/usdcLogo.png";
-import Loader from "./Loader.jsx";
-import { NEXO_ADDRESS, wETH_TOKEN_CONTRACT_ADDRESS, USDC_ADDRESS } from "../constants/constants.js";
 
 // Custom hook to fetch crypto prices
 const useCryptoPrices = (tokenAddresses, chain = EvmChain.ETHEREUM) => {
