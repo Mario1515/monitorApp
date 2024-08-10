@@ -31,7 +31,7 @@ const Dashboard = ({
             Account Overview
           </h2>
           <p className="text-gray-600">
-            Your Ethereum, WETH, and NEXO token balances are displayed below.
+          Your account information, live prices, ETH to wETH converter and a swapper are below.
           </p>
         </div>
         {/* Upper Container */}
@@ -48,6 +48,7 @@ const Dashboard = ({
           {/* Display Crypto Prices */}
           <CryptoPrices />
         </div>
+        
         {/* Lower Container */}
         <div className="flex flex-col lg:flex-row lg:space-x-8 lg:space-y-0 space-y-4">
           {/* CONVERTER ETH TO WETH */}

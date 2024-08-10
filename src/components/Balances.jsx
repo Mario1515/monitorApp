@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Loader from "./others/Loader";
+import Loader from "./Loader";
 
 const Balances = ({ ethBalance, wethBalance, nexoBalance, isLoading,  }) => {
   return (

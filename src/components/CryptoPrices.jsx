@@ -4,7 +4,7 @@ import { EvmChain } from '@moralisweb3/common-evm-utils';
 import wethLogo from "../assets/wethLogo.png";
 import nexoLogo from "../assets/nexoLogo.png";
 import usdcLogo from "../assets/usdcLogo.png";
-import Loader from "./others/Loader";
+import Loader from "./Loader.jsx";
 import { NEXO_ADDRESS, wETH_TOKEN_CONTRACT_ADDRESS, USDC_ADDRESS } from "../constants/constants.js";
 
 // Custom hook to fetch crypto prices

@@ -5,7 +5,7 @@ const Swap = () => {
     return (
         <div className="bg-sky-50 p-6 mt-6 rounded-lg shadow-md w-full">
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                Swap ETH and wETH
+                Swap wETH to NEXO
             </h3>
             <div className="flex items-center space-x-4">
                 {/* ETH Input Field */}
