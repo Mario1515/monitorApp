@@ -61,7 +61,7 @@ const CryptoPrices = () => {
     const isLoading = !prices;
 
     return (
-        <div className="bg-gray-50 p-4 rounded-lg shadow-md">
+        <div className="bg-gradient-to-b from-sky-50 to-sky-100 p-4 rounded-lg shadow-md">
             <div className="flex items-center space-x-1 mb-2">
                 <h3 className="text-xl font-semibold text-gray-800">Crypto Prices</h3>
                 <span className="text-sm font-normal text-gray-900 mt-1">in USDC</span>

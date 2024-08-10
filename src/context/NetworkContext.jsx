@@ -16,7 +16,7 @@ export const useNetwork = () => {
     //checking the network of the client
     const checkNetwork = (chainId) => {
         if(!ALLOWED_NETWORKS.includes(chainId)){
-            setNetworkError('You are connected to a different network. Please switch to Ethereum Mainnet or Sepolia.');
+          setNetworkError('You are connected to a different network. Please switch to Ethereum Mainnet or Sepolia.');
         } else {
           setNetworkError(null); 
         }

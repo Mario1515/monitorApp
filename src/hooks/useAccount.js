@@ -15,7 +15,7 @@ const useAccount = () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         if(accounts) {
           setAccount(accounts[0]);
-          toast.success('Wallet successfully connected!');
+         
         } else {
           toast.error('No accounts found. Please connect to MetaMask.');
         } 

@@ -22,9 +22,9 @@ const Wallet = () => {
   const isAllowedNetwork = network === "0x1" || network === "0xaa36a7";
 
   return (
-    <div className=" bg-gradient-to-r from-slate-50 to-indigo-600  absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 flex justify-center min-h-screen bg-gray-200 p-4">
+    <div className="bg-gradient-to-b from-slate-200 to-neutral-50 absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 flex justify-center min-h-screen bg-gray-200 p-4">
       {/* Wallet background   */}
-      <div className="bg-gradient-to-b from-neutral-50 to-stone-200 shadow-2xl rounded-2xl p-8 shadow-lg w-full max-w-4xl">
+      <div className="bg-gradient-to-b from-sky-200 to-blue-50 shadow-2xl rounded-2xl p-8 w-full max-w-4xl">
         {/* Crypto Dashboard Logo  */}
         <div className="flex items-center justify-center space-x-2 mb-20">
           <h4 className="text-3xl font-mono tracking-wide text-black-900 text-center">
@@ -83,7 +83,7 @@ const Wallet = () => {
             {/* User is using a prohibtet network */}
             {networkError && !isAllowedNetwork && (
               <div
-                className="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                className="border border-red-300 flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                 role="alert"
               >
                 <svg
@@ -117,7 +117,7 @@ const Wallet = () => {
                 <div className="flex justify-center mt-4">
                   <button
                     onClick={handleDisconnect}
-                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 border border-red-600 rounded shadow flex items-center"
+                    className="bg-red-500 hover:bg-red-600 text-white font-semibold mt-4 py-2 px-4  border border-red-600 rounded shadow flex items-center"
                     disabled={loading}
                   >
                     {loading ? (
