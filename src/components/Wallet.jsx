@@ -32,12 +32,12 @@ const Wallet = () => {
           </h4>
           <h2 className="text-sm font-bold">with </h2>
           <div className="flex justify-center items-center">
-  <img
-    src="/src/assets/MetamaskLogo.png"
-    alt="MetamaskLogo"
-    className="lg:w-25 lg:h-10"
-  />
-</div>
+            <img
+              src="/src/assets/MetamaskLogo.png"
+              alt="MetamaskLogo"
+              className="lg:w-25 lg:h-10"
+            />
+          </div>
         </div>
         {!account ? (
           <div className="">
