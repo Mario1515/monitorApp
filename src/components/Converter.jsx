@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { ethers } from 'ethers';
-import { wETH_TOKEN_CONTRACT_ADDRESS, WETH_ABI } from '../constants/constants.js';
-import toast from 'react-hot-toast';
+import React, { useState } from "react";
+import { ethers } from "ethers";
+import {
+  wETH_TOKEN_CONTRACT_ADDRESS,
+  WETH_ABI,
+} from "../constants/constants.js";
+import toast from "react-hot-toast";
 
 const Converter = ({ ethBalance }) => {
   const [ethAmount, setEthAmount] = useState("");
@@ -28,16 +31,15 @@ const Converter = ({ ethBalance }) => {
 
       const value = ethers.parseEther(amount); // Convert ETH to wei
       const tx = await wethContract.deposit({ value }); // Deposit ETH into WETH contract
-
       const receipt = await tx.wait(); // Wait for transaction to be mined
       setTransactionHash(receipt.transactionHash);
       setEthAmount(""); // Clear the input field
-      toast.success("Conversion successful!");
     } catch (err) {
       toast.error("An error occurred during the conversion. Please try again.");
       setEthAmount(""); // Clear the input field
       console.error(err);
     } finally {
+      toast.success("Conversion successful!");
       setLoading(false);
     }
   };
@@ -60,7 +62,7 @@ const Converter = ({ ethBalance }) => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-sky-50 to-sky-100 p-6 mt-6 rounded-lg shadow-md w-full">
+    <div className="bg-sky-50 p-6 mt-6 rounded-lg shadow-md w-full">
       <h3 className="text-xl font-semibold text-gray-800 mb-2">
         Convert ETH to wETH
       </h3>
@@ -81,20 +83,6 @@ const Converter = ({ ethBalance }) => {
         >
           {loading ? "Converting..." : "Convert"}
         </button>
-        {/* Transaction Hash */}
-        {transactionHash && (
-          <div className="mt-4 text-gray-600">
-            <p>Transaction Hash:</p>
-            <a
-              href={`https://etherscan.io/tx/${transactionHash}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
-            >
-              {transactionHash}
-            </a>
-          </div>
-        )}
       </div>
     </div>
   );

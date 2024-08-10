@@ -3,7 +3,7 @@ import React from "react";
 const Account = ({ account, network }) => {
     
   return (
-    <div className="flex-1 bg-gradient-to-b from-sky-50 to-sky-100 p-4 rounded-lg shadow-md flex flex-col justify-between">
+    <div className="flex-1 bg-sky-50 p-4 rounded-lg shadow-md flex flex-col justify-between">
       <div>
         <h3 className="text-xl font-semibold text-gray-800 mb-2">Account</h3>
         <p className="text-gray-700 break-all">{account}</p>

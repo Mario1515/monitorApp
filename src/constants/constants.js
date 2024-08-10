@@ -6,11 +6,12 @@ export const NEXO_TOKEN_ABI = [
   "function balanceOf(address owner) view returns (uint256)",
 ];
 export const wETH_TOKEN_CONTRACT_ADDRESS =
-  "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
+  "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
+  //0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14 - Seploia testnet
+  //0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 - ETH Mainnet 
 export const wETH_TOKEN_ABI = [
   "function balanceOf(address owner) view returns (uint256)",
 ];
-
 // to be used only when converting ETH to wETH
 export const WETH_ABI = [
   "function deposit() public payable",

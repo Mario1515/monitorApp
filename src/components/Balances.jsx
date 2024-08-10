@@ -3,7 +3,7 @@ import Loader from "./others/Loader";
 
 const Balances = ({ ethBalance, wethBalance, nexoBalance, isLoading,  }) => {
   return (
-    <div className="flex-1 bg-gradient-to-b from-sky-50 to-sky-100 p-4 rounded-lg shadow-md">
+    <div className="flex-1 bg-sky-50 p-4 rounded-lg shadow-md">
       <h3 className="text-xl font-semibold text-gray-800 mb-2">Balances</h3>
       <div className="space-y-4">
         <div className="flex justify-between">

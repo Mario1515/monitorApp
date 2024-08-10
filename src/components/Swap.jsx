@@ -3,7 +3,7 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 
 const Swap = () => {
     return (
-        <div className="bg-gradient-to-b from-sky-50 to-sky-100 p-6 mt-6 rounded-lg shadow-md w-full">
+        <div className="bg-sky-50 p-6 mt-6 rounded-lg shadow-md w-full">
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 Swap ETH and wETH
             </h3>
