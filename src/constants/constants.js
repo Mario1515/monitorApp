@@ -15,3 +15,5 @@ export const WETH_ABI = [
     "function deposit() public payable",
     "function balanceOf(address) external view returns (uint)"
   ];
+
+export const MY_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImFjYjYzN2FlLTkxNDUtNDBiMy1iNDIxLWYzNzBhZTg4ZTBiZCIsIm9yZ0lkIjoiNDA0MTc2IiwidXNlcklkIjoiNDE1MzEwIiwidHlwZUlkIjoiYzljNTMyY2YtOGY2Ny00MDkwLWIwYzItODJlZTI2NTMxMTQ1IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MjMyMzEzNTEsImV4cCI6NDg3ODk5MTM1MX0.qiF3uityWvZOiw-xSZ0V33yiBZmgI9XHFbELWxJgDjA"

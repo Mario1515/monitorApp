@@ -8,5 +8,12 @@ export default defineConfig({
     postcss: {
       plugins: [tailwindcss()],
     },
-  }
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+        define: {
+            global: 'globalThis',
+        },
+    },
+},
 })
