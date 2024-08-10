@@ -1,30 +1,54 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Moralis from 'moralis';
 import { EvmChain } from '@moralisweb3/common-evm-utils';
 import { wETH_TOKEN_CONTRACT_ADDRESS } from '../constants/constants.js';
 
-const useCryptoPrices = (tokenAd, chain = EvmChain.ETHEREUM) => {
-    const [price, setPrice] = useState(null);
+const useCryptoPrices = (tokenAddresses, chain = EvmChain.ETHEREUM) => {
+    const [prices, setPrices] = useState(null);
+    const hasFetchedRef = useRef(false); // Ref to track if data has been fetch
 
     useEffect(() => {
         const fetchTokenPrices = async () => {
-            try {
 
-                const response = await Moralis.EvmApi.token.getTokenPrice({
-                    address: wETH_TOKEN_CONTRACT_ADDRESS,
-                    chain,
+    if (hasFetchedRef.current) return; 
+      hasFetchedRef.current = true; // Set the flag to true after fetching
+            try {
+                const pricePromises = tokenAddresses.map(async (address) => {
+                  try {
+                    const response = await Moralis.EvmApi.token.getTokenPrice({
+                      address,
+                      chain,
+                    });
+                    return {
+                      address,
+                      price: response.toJSON().usdPrice.toFixed(2),
+                    };
+                  } catch (err) {
+                    console.error(`Error fetching price for ${address}:`, err);
+                    return {
+                      address,
+                      price: null,
+                    };
+                  }
                 });
-                setPrice(response.toJSON().usdPrice.toFixed(2));
-            } catch (err) {
+        
+                const pricesArray = await Promise.all(pricePromises);
+                const pricesObject = pricesArray.reduce((acc, { address, price }) => {
+                  acc[address] = price;
+                  return acc;
+                }, {});
+        
+                setPrices(pricesObject);
+              } catch (err) {
                 console.error('Error fetching token prices:', err);
-                setPrice(null);  // if error price should be null
-            }
+                setPrices({});
+              }
         };
 
         fetchTokenPrices();
     }, [chain]);
 
-    return price;
+    return prices;
 };
 
 export default useCryptoPrices;

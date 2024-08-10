@@ -3,8 +3,13 @@ import useLoading from "../hooks/useLoading";
 import useWrapEth from "../hooks/useWrapEth";
 import Loader from "./others/Loader";
 import useCryptoPrices from "../hooks/useCryptoPrices";
-import { wETH_TOKEN_CONTRACT_ADDRESS } from "../constants/constants.js";
+import {
+  NEXO_ADDRESS,
+  wETH_TOKEN_CONTRACT_ADDRESS,
+} from "../constants/constants.js";
 import wethLogo from "../assets/wethLogo.png";
+import nexoLogo from "../assets/nexoLogo.png";
+
 
 const Dashboard = ({
   account,
@@ -13,27 +18,23 @@ const Dashboard = ({
   wethBalance,
   network,
 }) => {
-
-
   const [isLoading, setIsLoading] = useState(true);
-
   const { wrapEth, wrapLoading, error } = useWrapEth();
   const [ethAmount, setEthAmount] = useState("");
 
-  const price = useCryptoPrices();
+  //getting prices
+  const prices = useCryptoPrices([NEXO_ADDRESS, wETH_TOKEN_CONTRACT_ADDRESS]);
 
-  //loading functionality (while fetching)
-
+  //loading functionality should be move todo
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1100);
 
-    return () => clearTimeout(timer);   
+    return () => clearTimeout(timer);
+  }, []);
 
-  }, [])
-
-  // Function to handle the conversion
+  // Function to handle the conversion should move todo
   const handleConvert = () => {
     if (ethAmount && !isNaN(ethAmount) && Number(ethAmount) > 0) {
       wrapEth(ethAmount);
@@ -80,19 +81,19 @@ const Dashboard = ({
               <div className="flex justify-between">
                 <span className="text-gray-600">ETH Balance:</span>
                 <span className="font-bold text-gray-900">
-                {isLoading ? <Loader /> : ethBalance || "0.000"}
+                  {isLoading ? <Loader /> : ethBalance || "0.000"}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">WETH Balance:</span>
                 <span className="font-bold text-gray-900">
-                {isLoading ? <Loader /> : wethBalance || "0.000"}
+                  {isLoading ? <Loader /> : wethBalance || "0.000"}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">NEXO Balance:</span>
                 <span className="font-bold text-gray-900">
-                {isLoading ? <Loader /> : nexoBalance || "0.000"}
+                  {isLoading ? <Loader /> : nexoBalance || "0.000"}
                 </span>
               </div>
             </div>
@@ -129,6 +130,7 @@ const Dashboard = ({
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Crypto Prices
             </h3>
+            {/* WETH COIN PRICE */}
             <div className="space-y-2">
               <div className="flex items-center space-x-1">
                 {/* Logo */}
@@ -141,7 +143,29 @@ const Dashboard = ({
                 <div className="flex-grow flex justify-between space-x-4">
                   <span className="text-gray-600">wETH Price:</span>
                   <span className="font-bold text-gray-900">
-                  {isLoading ? <Loader /> : price || "0.000"}
+                    {isLoading ? (
+                      <Loader />
+                    ) : (
+                      prices[wETH_TOKEN_CONTRACT_ADDRESS] || "2623.11"
+                    )}
+                  </span>
+                </div>
+              </div>
+
+              {/* NEXO COINT PRICE */}
+              <div className="flex items-center space-x-1">
+                {/* Logo */}
+                <img
+                  src={nexoLogo}
+                  alt="NEXO Logo"
+                  className="w-9 h-8 object-contain"
+                />
+                {/* Price Info */}
+                <div className="flex-grow flex justify-between space-x-4">
+                  <span className="text-gray-600">NEXO Price:</span>
+                  <span className="font-bold text-gray-900">
+                    {/* If Moralis API is not availabie, will use historic 24h info */}
+                    {isLoading ? <Loader /> : prices[NEXO_ADDRESS] || "1.08"}
                   </span>
                 </div>
               </div>
