@@ -6,10 +6,12 @@ import useCryptoPrices from "../hooks/useCryptoPrices";
 import {
   NEXO_ADDRESS,
   wETH_TOKEN_CONTRACT_ADDRESS,
+  USDC_ADDRESS,
 } from "../constants/constants.js";
 import wethLogo from "../assets/wethLogo.png";
 import nexoLogo from "../assets/nexoLogo.png";
-
+import usdcLogo from "../assets/usdcLogo.png";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Dashboard = ({
   account,
@@ -23,7 +25,7 @@ const Dashboard = ({
   const [ethAmount, setEthAmount] = useState("");
 
   //getting prices
-  const prices = useCryptoPrices([NEXO_ADDRESS, wETH_TOKEN_CONTRACT_ADDRESS]);
+  const prices = useCryptoPrices([NEXO_ADDRESS, wETH_TOKEN_CONTRACT_ADDRESS, USDC_ADDRESS]);
 
   //loading functionality should be move todo
   useEffect(() => {
@@ -98,6 +100,75 @@ const Dashboard = ({
               </div>
             </div>
           </div>
+
+          {/* Display Crypto Prices */}
+          <div className="bg-gray-50 p-4 rounded-lg shadow-md">
+            <div className="flex items-center space-x-1 mb-2" >
+            <h3 className="text-xl font-semibold text-gray-800">
+              Crypto Prices
+            </h3>
+            <span className="text-sm font-normal text-gray-900 mt-1">in USDC</span>
+            </div>
+            {/* WETH COIN PRICE */}
+            <div className="space-y-2">
+              <div className="flex items-center space-x-1">
+                {/* Logo */}
+                <img
+                  src={wethLogo}
+                  alt="wETH Logo"
+                  className="w-10 h-10 object-contain"
+                />
+                {/* Price Info */}
+                <div className="flex-grow flex justify-between space-x-4">
+                  <span className="text-gray-600">wETH Price:</span>
+                  <span className="font-bold text-gray-900">$
+                    {isLoading ? (
+                      <Loader />
+                    ) : (
+                      prices[wETH_TOKEN_CONTRACT_ADDRESS] || "2623.11"
+                    )}
+                  </span>
+                </div>
+              </div>
+
+              {/* NEXO COINT PRICE */}
+              <div className="flex items-center space-x-1">
+                {/* Logo */}
+                <img
+                  src={nexoLogo}
+                  alt="NEXO Logo"
+                  className="w-9 h-8 object-contain"
+                />
+                {/* Price Info */}
+                <div className="flex-grow flex justify-between space-x-4">
+                  <span className="text-gray-600">NEXO Price:</span>
+                  <span className="font-bold text-gray-900">$
+                    {/* If Moralis API is not availabie, will use historic 24h info */}
+                    {isLoading ? <Loader /> : prices[NEXO_ADDRESS] || "1.08"}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-1">
+                {/* Logo */}
+                <img
+                  src={usdcLogo}
+                  alt="USDC Logo"
+                  className="w-9 h-8 object-contain"
+                />
+                {/* Price Info */}
+                <div className="flex-grow flex justify-between space-x-4">
+                  <span className="text-gray-600">USDC Price:</span>
+                  <span className="font-bold text-gray-900">$
+                    {/* If Moralis API is not availabie, will use historic 24h info */}
+                    {isLoading ? <Loader /> : prices[USDC_ADDRESS] || "1.00"}
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
 
         {/* Lower Container */}
@@ -122,53 +193,6 @@ const Dashboard = ({
               >
                 Convert
               </button>
-            </div>
-          </div>
-
-          {/* Display Crypto Prices */}
-          <div className="bg-gray-50 p-6 mt-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Crypto Prices
-            </h3>
-            {/* WETH COIN PRICE */}
-            <div className="space-y-2">
-              <div className="flex items-center space-x-1">
-                {/* Logo */}
-                <img
-                  src={wethLogo}
-                  alt="wETH Logo"
-                  className="w-10 h-10 object-contain"
-                />
-                {/* Price Info */}
-                <div className="flex-grow flex justify-between space-x-4">
-                  <span className="text-gray-600">wETH Price:</span>
-                  <span className="font-bold text-gray-900">
-                    {isLoading ? (
-                      <Loader />
-                    ) : (
-                      prices[wETH_TOKEN_CONTRACT_ADDRESS] || "2623.11"
-                    )}
-                  </span>
-                </div>
-              </div>
-
-              {/* NEXO COINT PRICE */}
-              <div className="flex items-center space-x-1">
-                {/* Logo */}
-                <img
-                  src={nexoLogo}
-                  alt="NEXO Logo"
-                  className="w-9 h-8 object-contain"
-                />
-                {/* Price Info */}
-                <div className="flex-grow flex justify-between space-x-4">
-                  <span className="text-gray-600">NEXO Price:</span>
-                  <span className="font-bold text-gray-900">
-                    {/* If Moralis API is not availabie, will use historic 24h info */}
-                    {isLoading ? <Loader /> : prices[NEXO_ADDRESS] || "1.08"}
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

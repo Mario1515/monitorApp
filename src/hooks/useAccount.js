@@ -1,14 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ETH_MAINNET_CHAIN_ID } from "../constants/constants.js";
+import toast, { Toaster } from 'react-hot-toast';
 
 const useAccount = () => {
   const [account, setAccount] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
 
   const connectWallet = useCallback(async () => {
     //no metamask case
     if (!window.ethereum) {
-      setErrorMessage("Install MetaMask to continue");
+      toast.error('Install MetaMask to continue');
       return;
     }
     //connecting the account
@@ -16,22 +15,22 @@ const useAccount = () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         if(accounts) {
           setAccount(accounts[0]);
+          toast.success('Wallet successfully connected!');
         } else {
-          setErrorMessage('No accounts found. Please connect to MetaMask.');
+          toast.error('No accounts found. Please connect to MetaMask.');
         } 
       } catch (err) {
-        setErrorMessage('Could not connect to wallet: ' + err.message);
+        toast.error('Could not connect to wallet: ' + err.message);
       }
   });
 
   const disconnectWallet = () => {
     setAccount(null);
-    setErrorMessage(null);
+    toast.success('Successfully disconnected wallet.');
   };
 
   return {
     account,
-    errorMessage,
     connectWallet,
     disconnectWallet
   };

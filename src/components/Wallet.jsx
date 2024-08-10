@@ -23,7 +23,7 @@ const Wallet = () => {
 
   return (
     <div className=" bg-gradient-to-r from-slate-50 to-indigo-600  absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 flex justify-center min-h-screen bg-gray-200 p-4">
-      <div className="bg-gradient-to-b from-neutral-50 to-stone-200 shadow-2xl rounded-2xl p-8 shadow-lg w-full max-w-2xl">
+      <div className="bg-gradient-to-b from-neutral-50 to-stone-200 shadow-2xl rounded-2xl p-8 shadow-lg w-full max-w-4xl">
         <div className="flex items-center justify-center space-x-2 mb-20">
           <h4 className="text-3xl font-mono tracking-wide text-black-900 text-center">Crypto Dashboard</h4>
           <h2 className="text-sm font-bold">with </h2>
