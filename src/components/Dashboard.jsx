@@ -13,37 +13,25 @@ const Dashboard = ({
   wethBalance,
   network,
 }) => {
-  const [ethLoading, startEthLoading] = useLoading();
-  const [wethLoading, startWethLoading] = useLoading();
-  const [nexoLoading, startNexoLoading] = useLoading();
 
-  const [priceLoading, startPriceLoading] = useLoading();
 
-  
+  const [isLoading, setIsLoading] = useState(true);
+
   const { wrapEth, wrapLoading, error } = useWrapEth();
   const [ethAmount, setEthAmount] = useState("");
 
   const price = useCryptoPrices();
 
   //loading functionality (while fetching)
+
   useEffect(() => {
-    startEthLoading(() => {
-      setTimeout(() => {}, 1000);
-    });
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1100);
 
-    startWethLoading(() => {
-      setTimeout(() => {}, 1000);
-    });
+    return () => clearTimeout(timer);   
 
-    startNexoLoading(() => {
-      setTimeout(() => {}, 1000);
-    });
-
-    startPriceLoading(() => {
-      setTimeout(() => {}, 1000);
-    });
-
-  }, [ethBalance, nexoBalance, wethBalance, price]);
+  }, [])
 
   // Function to handle the conversion
   const handleConvert = () => {
@@ -92,19 +80,19 @@ const Dashboard = ({
               <div className="flex justify-between">
                 <span className="text-gray-600">ETH Balance:</span>
                 <span className="font-bold text-gray-900">
-                  {ethLoading ? <Loader /> : ethBalance || "0.000"}
+                {isLoading ? <Loader /> : ethBalance || "0.000"}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">WETH Balance:</span>
                 <span className="font-bold text-gray-900">
-                  {wethLoading ? <Loader /> : wethBalance || "0.000"}
+                {isLoading ? <Loader /> : wethBalance || "0.000"}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">NEXO Balance:</span>
                 <span className="font-bold text-gray-900">
-                  {nexoLoading ? <Loader /> : nexoBalance || "0.000"}
+                {isLoading ? <Loader /> : nexoBalance || "0.000"}
                 </span>
               </div>
             </div>
@@ -153,7 +141,7 @@ const Dashboard = ({
                 <div className="flex-grow flex justify-between space-x-4">
                   <span className="text-gray-600">wETH Price:</span>
                   <span className="font-bold text-gray-900">
-                   {priceLoading ? <Loader /> : price || "0.000"}
+                  {isLoading ? <Loader /> : price || "0.000"}
                   </span>
                 </div>
               </div>
