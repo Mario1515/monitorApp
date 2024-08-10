@@ -28,7 +28,7 @@ const useBalance = (address) => {
           // Fetch NEXO token balance
           try {
             const provider = new ethers.BrowserProvider(window.ethereum);
-            const contract = new ethers.Contract(NEXO_ADDRESS, NEXO_TOKEN_ABI, provider);
+            const contract = new ethers.Contract(NEXO_TOKEN_CONTRACT_ADDRESS, NEXO_TOKEN_ABI, provider);
             const tokenBalance = await contract.balanceOf(address);
             setNexoBalance(formatBalance(ethers.formatEther(tokenBalance)));
           } catch (err) {

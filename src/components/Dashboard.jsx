@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import useLoading from "../hooks/useLoading";
-import useWrapEth from "../hooks/useWrapEth";
 import Loader from "./others/Loader";
-import useCryptoPrices from "../hooks/useCryptoPrices";
-import {
-  NEXO_ADDRESS,
-  wETH_TOKEN_CONTRACT_ADDRESS,
-  USDC_ADDRESS,
-} from "../constants/constants.js";
-import wethLogo from "../assets/wethLogo.png";
-import nexoLogo from "../assets/nexoLogo.png";
-import usdcLogo from "../assets/usdcLogo.png";
 import toast, { Toaster } from 'react-hot-toast';
+import CryptoPrices from "./CryptoPrices.jsx";
+import Converter from "./Converter.jsx";
+
 
 const Dashboard = ({
   account,
@@ -21,11 +13,7 @@ const Dashboard = ({
   network,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const { wrapEth, wrapLoading, error } = useWrapEth();
   const [ethAmount, setEthAmount] = useState("");
-
-  //getting prices
-  const prices = useCryptoPrices([NEXO_ADDRESS, wETH_TOKEN_CONTRACT_ADDRESS, USDC_ADDRESS]);
 
   //loading functionality should be move todo
   useEffect(() => {
@@ -59,13 +47,16 @@ const Dashboard = ({
         </div>
 
         {/* Upper Container  */}
-        <div className="flex flex-col lg:flex-row lg:space-x-8">
-          {/* Account Section and Network Section */}
-          <div className="flex-1 bg-gray-50 p-4 rounded-lg shadow-md">
+              <div className="flex flex-col lg:flex-row lg:space-x-8 lg:space-y-0 space-y-4">
+        {/* Account Section */}
+        <div className="flex-1 bg-gray-50 p-4 rounded-lg shadow-md flex flex-col justify-between">
+          <div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Account
             </h3>
             <p className="text-gray-700 break-all">{account}</p>
+          </div>
+          <div>
             <h3 className="text-xl font-semibold text-gray-800 mt-2 mb-1">
               Network
             </h3>
@@ -73,6 +64,8 @@ const Dashboard = ({
               {network === "0x1" ? "Ethereum Mainnet" : "Sepolia Testnet"}
             </p>
           </div>
+        </div>
+
 
           {/* Balances Section */}
           <div className="flex-1 bg-gray-50 p-4 rounded-lg shadow-md">
@@ -102,99 +95,12 @@ const Dashboard = ({
           </div>
 
           {/* Display Crypto Prices */}
-          <div className="bg-gray-50 p-4 rounded-lg shadow-md">
-            <div className="flex items-center space-x-1 mb-2" >
-            <h3 className="text-xl font-semibold text-gray-800">
-              Crypto Prices
-            </h3>
-            <span className="text-sm font-normal text-gray-900 mt-1">in USDC</span>
-            </div>
-            {/* WETH COIN PRICE */}
-            <div className="space-y-2">
-              <div className="flex items-center space-x-1">
-                {/* Logo */}
-                <img
-                  src={wethLogo}
-                  alt="wETH Logo"
-                  className="w-10 h-10 object-contain"
-                />
-                {/* Price Info */}
-                <div className="flex-grow flex justify-between space-x-4">
-                  <span className="text-gray-600">wETH Price:</span>
-                  <span className="font-bold text-gray-900">$
-                    {isLoading ? (
-                      <Loader />
-                    ) : (
-                      prices[wETH_TOKEN_CONTRACT_ADDRESS] || "2623.11"
-                    )}
-                  </span>
-                </div>
-              </div>
-
-              {/* NEXO COINT PRICE */}
-              <div className="flex items-center space-x-1">
-                {/* Logo */}
-                <img
-                  src={nexoLogo}
-                  alt="NEXO Logo"
-                  className="w-9 h-8 object-contain"
-                />
-                {/* Price Info */}
-                <div className="flex-grow flex justify-between space-x-4">
-                  <span className="text-gray-600">NEXO Price:</span>
-                  <span className="font-bold text-gray-900">$
-                    {/* If Moralis API is not availabie, will use historic 24h info */}
-                    {isLoading ? <Loader /> : prices[NEXO_ADDRESS] || "1.08"}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-1">
-                {/* Logo */}
-                <img
-                  src={usdcLogo}
-                  alt="USDC Logo"
-                  className="w-9 h-8 object-contain"
-                />
-                {/* Price Info */}
-                <div className="flex-grow flex justify-between space-x-4">
-                  <span className="text-gray-600">USDC Price:</span>
-                  <span className="font-bold text-gray-900">$
-                    {/* If Moralis API is not availabie, will use historic 24h info */}
-                    {isLoading ? <Loader /> : prices[USDC_ADDRESS] || "1.00"}
-                  </span>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
+            <CryptoPrices /> 
         </div>
-
         {/* Lower Container */}
         <div className="flex flex-col lg:flex-row lg:space-x-8">
           {/* CONVERTER ETH TO WETH  */}
-          <div className="bg-gray-50 p-6 mt-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Convert ETH to wETH
-            </h3>
-            <div className="flex flex-col space-y-4">
-              {/* Input Field */}
-              <input
-                type="number"
-                onChange={(e) => setEthAmount(e.target.value)}
-                placeholder="Enter ETH amount"
-                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              {/* Convert Button */}
-              <button
-                onClick={handleConvert}
-                className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                Convert
-              </button>
-            </div>
-          </div>
+          <Converter  ethBalance={ethBalance} />
         </div>
       </div>
     </div>
